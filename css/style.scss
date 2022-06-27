@@ -1,0 +1,462 @@
+@use 'base/variables' as v;
+@use 'pages/header.scss' as h;
+@use 'pages/footer.scss' as f;
+@use 'pages/reset';
+
+
+html {
+    font-size: 62.5%;
+    font-family: v.$base_font, serif;
+}
+
+body {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    color: v.$main-color;
+}
+
+li {
+    list-style: none;
+}
+
+h2 {
+    font-size: 3.6rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+h3 {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+}
+
+.wrapper {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.fadein {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s;
+}
+
+/*--------------------
+header
+----------------------*/
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    position: fixed;
+    z-index: 10;
+    background-color: #fff;
+
+    .header__logo {
+        width: 175px;
+        height: 40px;
+    }
+
+    /*
+    ハンバーガーメニュー
+    メニューが閉じている時は、「left: -300px;」で画面左に隠し、
+    「opacity: 0;」で非表示にしている
+    */
+    .header__nav {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: -300px;
+        bottom: 0;
+        width: 300px;
+        color: #fff;
+        padding: 60px 25px;
+        background-color: #121212;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        transition: all 0.5s;
+        z-index: 20;
+        opacity: 0;
+
+        & a {
+            color: #fff;
+        }
+
+        .header__nav-menu {
+            margin: 0;
+            padding: 0;
+            margin-bottom: 60px;
+            border-top: 1px solid #fff;
+
+            li {
+                position: relative;
+                margin: 0;
+                padding: 20px 0;
+                border-bottom: 1px solid #fff;
+                text-transform: uppercase;
+            }
+        }
+
+        .header__nav-sns {
+            margin: 0;
+            padding: 0;
+
+            & li {
+                padding: 5px 0;
+            }
+        }
+
+        
+    }
+    .toggle_btn {
+        display: block;
+        position: fixed;
+        top: 25px;
+        right: 45px;
+        width: 30px;
+        height: 30px;
+        transition: all .5s;
+        cursor: pointer;
+        z-index: 20;
+
+    /*
+    ハンバーガーメニューの線の設定(メニューが閉じている時)
+    */
+        span {
+            display: block;
+            position: absolute;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: #333;
+            border-radius: 4px;
+            transition: all .5s;
+        }
+
+        /*
+        1本目の線の位置を設定
+        */
+
+        span:nth-child(1) {
+            top: 4px;
+        }
+
+        /*
+        2本目の線の位置を設定
+        */
+        span:nth-child(2) {
+            top: 14px;
+        }
+
+        /*
+        3本目の線の位置を設定
+        */
+        span:nth-child(3) {
+            bottom: 4px;
+        }
+
+
+    }
+
+    /*
+    ハンバーガーメニューの線の設定(メニューが開いている時)
+    線の色を白に変更
+    */
+
+    &.open {
+
+        .header__nav {
+        left: 0;
+        opacity: 1;
+        }
+
+        .toggle_btn span {
+            background-color: #fff;
+        }
+
+        /*
+         1本目の線を-45度回転
+        */
+        .toggle_btn span:nth-child(1) {
+            -webkit-transform: translateY(10px) rotate(-315deg);
+            transform: translateY(10px) rotate(-315deg);
+        }
+
+        /*
+        2本目の線を45度回転
+        */
+        .toggle_btn span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .toggle_btn span:nth-child(3) {
+            -webkit-transform: translateY(-10px) rotate(315deg);
+            transform: translateY(-10px) rotate(315deg);
+            background-color: #fff;
+        }
+
+    }
+
+    &.mask {
+        display: none;
+        transition: all 0.5s;
+    }
+
+    /*
+    メニューを開いている時は、全体を黒背景にする
+    */
+    &.open .mask {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: .8;
+        z-index: 10;
+        cursor: pointer;
+    }
+
+}
+
+/*---------------------------------
+main
+---------------------------------*/
+main {
+    padding-top: 80px;
+}
+
+
+/*---------------------------------
+video
+---------------------------------*/
+.video {
+    margin-bottom: 100px;
+}
+
+.bg-video {
+    width: 100%;
+}
+
+/*----------------------------------
+pickup secton
+----------------------------------*/
+
+.pickup {
+    width: 100%;
+    padding: 0 0 100px;
+
+    .slick-area {
+        font-size: 0;
+    }
+
+    li {
+        padding: 0 30px;
+    }
+}
+
+/*-----------------------------------
+feature section
+-----------------------------------*/
+.feature {
+    padding-bottom: 60px;
+
+    .feature__container {
+        display: grid;
+        // grid-template-columns: 31% 31% 31%;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 444px 444px 444px;
+        gap: 26px;
+
+        .card {
+            box-shadow: 0px 0px 8px #00000029;
+            opacity: 1;
+
+            .card__body {
+                padding: 27px 37px 25px 31px;
+                // height: 187px;
+
+                .card__title {
+                    font-size: 1.2rem;
+                    line-height: 1.6;
+                    margin-bottom: 20px;
+                }
+
+                .card__text_large {
+                    margin-bottom: 33px;
+                    font-weight: bold;
+                }
+
+                .card__text_small {
+                    font-size: 1.2rem;
+                    text-align: right;
+                }
+            }
+        }
+    }
+}
+
+/*----------------------------
+contact
+----------------------------*/
+
+.contactSec {
+    padding: 50px 0 10px;
+    background: #000;
+    color: #fff;
+
+
+
+    .contact {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 60px;
+
+        .contact__text-inner {
+            width: 43%;
+        }
+
+        .contact__text {
+            margin-bottom: 30px;
+        }
+
+
+        .contact__form {
+            width: 44%;
+
+            & input[type="text"],
+            input[type="email"],
+            textarea {
+                background-color: #fff;
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+
+            .button {
+
+                display: inline-block;
+                text-align: center;
+
+                & input[type="submit"] {
+                    width: 200px;
+                    color: #fff;
+                    background-color: v.$main-color;
+                    border: solid 1px #fff;
+                    padding: 12px 0;
+                    margin-bottom: 0;
+
+                    &:hover {
+                        color: #202020;
+                        background-color: #fff;
+                    }
+                }
+            }
+
+
+        }
+    }
+}
+
+/*----------------------------
+footer
+----------------------------*/
+footer {
+    background: v.$main-color;
+    color: #fff;
+    text-align: center;
+    font-size: 1.2rem;
+    padding-bottom: 10px;
+}
+
+
+@media screen and (max-width:600px) {
+    h2 {
+        font-size: 2.4rem;
+        margin-bottom: 20px;
+    }
+
+    /*-----------------------------------
+    header
+    -----------------------------------*/
+
+    header {
+        padding: 20px 16px;
+
+        .toggle_btn {
+            right: 30px;
+        }
+    }
+
+
+
+    /*-----------------------------------
+    video
+    -----------------------------------*/
+    .video {
+        margin-bottom: 80px;
+
+        .bg-video {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
+
+    }
+
+
+    /*-----------------------------------
+    feature section
+    -----------------------------------*/
+    .feature {
+
+        padding-bottom: 90px;
+
+        .feature__container {
+            grid-template-columns: 100%;
+        }
+
+    }
+
+    /*-----------------------------------
+    contact section
+    -----------------------------------*/
+    .contactSec {
+
+        padding-top: 80px;
+
+        .contact {
+            display: block;
+
+            .contact__text-inner {
+                width: 100%;
+            }
+
+            .contact__form {
+                width: 100%;
+
+                .button {
+                    width: 100%;
+                    text-align: center;
+
+                    input[type="submit"] {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+}
