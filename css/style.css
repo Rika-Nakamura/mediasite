@@ -256,7 +256,7 @@ feature section
   gap: 26px;
 }
 .feature .feature__container .card {
-  box-shadow: 0px 0px 8px #00000029;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1607843137);
   opacity: 1;
 }
 .feature .feature__container .card .card__body {
@@ -340,7 +340,6 @@ footer {
     font-size: 2.4rem;
     margin-bottom: 20px;
   }
-
   /*-----------------------------------
   header
   -----------------------------------*/
@@ -350,7 +349,6 @@ footer {
   header .toggle_btn {
     right: 30px;
   }
-
   /*-----------------------------------
   video
   -----------------------------------*/
@@ -363,7 +361,6 @@ footer {
     -o-object-fit: cover;
        object-fit: cover;
   }
-
   /*-----------------------------------
   feature section
   -----------------------------------*/
@@ -373,7 +370,6 @@ footer {
   .feature .feature__container {
     grid-template-columns: 100%;
   }
-
   /*-----------------------------------
   contact section
   -----------------------------------*/
@@ -396,5 +392,4 @@ footer {
   .contactSec .contact .contact__form .button input[type=submit] {
     width: 100%;
   }
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
